@@ -4,6 +4,8 @@
   "description": "A tool to generate lists of contributors",
   "main": "./prod/index.js",
   "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --max-warnings 0",
     "test": "echo 'no tests yet'"
   },
   "repository": {
