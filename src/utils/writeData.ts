@@ -1,0 +1,44 @@
+import { writeFile } from "fs/promises";
+import { join } from "path";
+
+import { ForumContributor } from "../interfaces/forum/ForumContributor";
+import { GithubContributor } from "../interfaces/github/GitHubContributor";
+import { NewsContributor } from "../interfaces/news/NewsContributor";
+
+/**
+ * Utility to parse data into a CSV format and write it to a file.
+ *
+ * @param {GithubContributor[] | ForumContributor[] | NewsContributor[]} data The data to parse.
+ * @param {string} type The type of data being parsed. Either GitHub, Forum, or News.
+ * @param {string} fileName The name of the file to write to. Will be written as `/data/{fileName}.csv`.
+ */
+export const writeData = async (
+  data: GithubContributor[] | ForumContributor[] | NewsContributor[],
+  type: "GitHub" | "Forum" | "News",
+  fileName: string
+) => {
+  let parsedData = "";
+
+  if (type === "GitHub") {
+    parsedData += "name,github-url,commits\n";
+    (data as GithubContributor[]).forEach((datum) => {
+      parsedData += `${datum.name},${datum.url},${datum.commits}\n`;
+    });
+  }
+
+  if (type === "Forum") {
+    parsedData += "name,forum-url,likes\n";
+    (data as ForumContributor[]).forEach((datum) => {
+      parsedData += `${datum.name},${datum.url},${datum.likes}\n`;
+    });
+  }
+
+  if (type === "News") {
+    parsedData += "name,news-url,posts\n";
+    (data as NewsContributor[]).forEach((datum) => {
+      parsedData += `${datum.name},${datum.url},${datum.posts}\n`;
+    });
+  }
+
+  await writeFile(join(process.cwd(), "data", `${fileName}.csv`), parsedData);
+};
