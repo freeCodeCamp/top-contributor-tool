@@ -1,12 +1,22 @@
-# Project Name
+# Top Contributor Tools
 
-Project Description
+This project is a CLI tool that aggregates a list of top contributors for our `/learn` repository, Crowdin translations, forum, and news publication.
 
-## Live Version
+## Generating Data
 
-This page is not yet deployed.
+To run this tool, complete the following steps:
 
-<!--This page is currently deployed. [View the live website.]()-->
+- Clone this repository locally.
+- Run `npm ci` to install the dependencies.
+- Run `npm run build` to compile the TypeScript.
+- Run `cp sample.env .env` to generate your secrets file.
+- Configure your secrets:
+  - `GITHUB_TOKEN`: A GitHub PAT token with `repo` scope.
+  - `GHOST_KEY`: A _Content_ API key for the Ghost publication.
+  - `CROWDIN_KEY`: An API key for Crowdin, with access to all projects and the `reports` scope.
+- Run `npm start` to launch the tool.
+
+The tool will then begin collecting data, aggregating the results, and storing the results in `.csv` files. The files will be saved to the `data` directory, and can be opened with a text editor or most spreadsheet programs.
 
 ## Feedback and Bugs
 
@@ -19,17 +29,3 @@ If you would like to contribute to the project, you may create a Pull Request co
 ## Code of Conduct
 
 Before interacting with our community, please read our [Code of Conduct](CODE_OF_CONDUCT.md).
-
-## Licensing
-
-Copyright (C) 2021 Nicholas Carrigan
-
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
-
-The full license terms may be viewed in the [LICENSE.md file](./LICENSE.md)
-
-## Contact
-
-We may be contacted through our [Chat Server](http://chat.nhcarrigan.com) or via [email form](https://contact.nhcarrigan.com).
