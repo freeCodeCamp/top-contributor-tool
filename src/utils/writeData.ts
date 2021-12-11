@@ -1,6 +1,7 @@
 import { writeFile } from "fs/promises";
 import { join } from "path";
 
+import { CrowdinContributor } from "../interfaces/crowdin/CrowdinContributor";
 import { ForumContributor } from "../interfaces/forum/ForumContributor";
 import { GithubContributor } from "../interfaces/github/GitHubContributor";
 import { NewsContributor } from "../interfaces/news/NewsContributor";
@@ -8,13 +9,17 @@ import { NewsContributor } from "../interfaces/news/NewsContributor";
 /**
  * Utility to parse data into a CSV format and write it to a file.
  *
- * @param {GithubContributor[] | ForumContributor[] | NewsContributor[]} data The data to parse.
+ * @param {GithubContributor[] | ForumContributor[] | NewsContributor[] | CrowdinContributor[]} data The data to parse.
  * @param {string} type The type of data being parsed. Either GitHub, Forum, or News.
  * @param {string} fileName The name of the file to write to. Will be written as `/data/{fileName}.csv`.
  */
 export const writeData = async (
-  data: GithubContributor[] | ForumContributor[] | NewsContributor[],
-  type: "GitHub" | "Forum" | "News",
+  data:
+    | GithubContributor[]
+    | ForumContributor[]
+    | NewsContributor[]
+    | CrowdinContributor[],
+  type: "GitHub" | "Forum" | "News" | "Crowdin",
   fileName: string
 ) => {
   let parsedData = "";
@@ -37,6 +42,13 @@ export const writeData = async (
     parsedData += "name,news-url,posts\n";
     (data as NewsContributor[]).forEach((datum) => {
       parsedData += `${datum.name},${datum.url},${datum.posts}\n`;
+    });
+  }
+
+  if (type === "Crowdin") {
+    parsedData += "name,username,contributions\n";
+    (data as CrowdinContributor[]).forEach((datum) => {
+      parsedData += `${datum.name},${datum.username},${datum.contributions}\n`;
     });
   }
 

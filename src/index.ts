@@ -1,3 +1,4 @@
+import { getCrowdinContributions } from "./modules/getCrowdinContributions";
 import { getForumData } from "./modules/getForumContributions";
 import { getGitHubContributions } from "./modules/getGitHubContributions";
 import { getNewsData } from "./modules/getNewsContributions";
@@ -35,6 +36,14 @@ import { writeData } from "./utils/writeData";
   logHandler.log("debug", "Writing News Data");
 
   await writeData(news, "News", "news");
+
+  logHandler.log("debug", "Fetching Crowdin Data");
+
+  const crowdin = await getCrowdinContributions(credentials);
+
+  logHandler.log("debug", "Writing Crowdin Data");
+
+  await writeData(crowdin, "Crowdin", "crowdin");
 
   logHandler.log("debug", "Process complete! Have a great day! :)");
 })();

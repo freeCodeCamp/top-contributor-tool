@@ -19,8 +19,14 @@ export const validateEnv = (): Credentials => {
     process.exit(1);
   }
 
+  if (!process.env.CROWDIN_KEY) {
+    logHandler.log("error", "Missing Crowdin credentials.");
+    process.exit(1);
+  }
+
   return {
     githubToken: process.env.GITHUB_TOKEN,
     ghostKey: process.env.GHOST_KEY,
+    crowdinKey: process.env.CROWDIN_KEY,
   };
 };
