@@ -4,6 +4,7 @@
   "description": "A tool to generate lists of contributors",
   "main": "./prod/index.js",
   "scripts": {
+    "aggregate": "node -r dotenv/config prod/modules/aggregateData.js",
     "build": "tsc",
     "lint": "eslint src --max-warnings 0",
     "start": "node -r dotenv/config prod/index.js",

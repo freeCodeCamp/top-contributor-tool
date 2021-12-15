@@ -18,6 +18,12 @@ To run this tool, complete the following steps:
 
 The tool will then begin collecting data, aggregating the results, and storing the results in `.csv` files. The files will be saved to the `data` directory, and can be opened with a text editor or most spreadsheet programs.
 
+## Aggregating Data
+
+After following the steps in the "Generating Data" section above, you can use the tool to aggregate data into a markdown file. Run `npm run aggregate` to start the automated process. The tool will read each `.csv` file within the `data` directory and parse it into a markdown list. The first column in each `.csv` file should be the contributor's _name_, and the second column should be the contributor's _url_ (GitHub, Twitter, YouTube, etc.). The tool will ignore any columns after the second column. The tool will generate the list in a `- [name](url)` format, to allow hotlinks. If the `url` is empty, the tool will add the contributor in the `- name` format.
+
+The list will be sorted and written to `data/contributors.md`, where you can copy and paste it to whichever platform you wish to announce top contributors on.
+
 ## Feedback and Bugs
 
 If you have feedback or a bug report, please feel free to open a GitHub issue!
