@@ -36,7 +36,7 @@
   "dependencies": {
     "@tryghost/content-api": "^1.5.16",
     "dotenv": "^16.0.0",
-    "node-fetch": "^2.6.6",
+    "node-fetch": "^3.0.0",
     "winston": "^3.3.3"
   }
 }
