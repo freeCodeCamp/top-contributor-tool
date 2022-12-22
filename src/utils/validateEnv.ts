@@ -24,9 +24,21 @@ export const validateEnv = (): Credentials => {
     process.exit(1);
   }
 
+  if (!process.env.FORUM_KEY) {
+    logHandler.log("error", "Missing Forum credentials.");
+    process.exit(1);
+  }
+
+  if (!process.env.FORUM_USERNAME) {
+    logHandler.log("error", "Missing Forum credentials.");
+    process.exit(1);
+  }
+
   return {
     githubToken: process.env.GITHUB_TOKEN,
     ghostKey: process.env.GHOST_KEY,
     crowdinKey: process.env.CROWDIN_KEY,
+    forumKey: process.env.FORUM_KEY,
+    forumUsername: process.env.FORUM_USERNAME,
   };
 };

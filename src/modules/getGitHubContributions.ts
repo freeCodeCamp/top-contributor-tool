@@ -23,6 +23,7 @@ const parseGitHubCommits = (data: GitHubCommit[]): GithubContributor[] => {
         name: commit.commit.author.name,
         commits: 1,
         url: commit.author.html_url,
+        email: commit.commit.author.email,
       });
     }
   }

@@ -8,8 +8,11 @@ import { Credentials } from "../interfaces/Credentials";
 import { NewsContributor } from "../interfaces/news/NewsContributor";
 import { logHandler } from "../utils/logHandler";
 
-const parseNewsData = (data: PostsOrPages): NewsContributor[] => {
+const parseNewsData = (
+  data: PostsOrPages
+): { news: NewsContributor[]; urls: string[] } => {
   const results: NewsContributor[] = [];
+  const staffUrls: string[] = [];
   data.forEach((datum) => {
     if (!datum.primary_author || !datum.primary_author.name) {
       return;
@@ -23,9 +26,10 @@ const parseNewsData = (data: PostsOrPages): NewsContributor[] => {
       exists.posts++;
     } else {
       results.push({ name, username, url, posts: 1 });
+      staffUrls.push(`https://freecodecamp.org/news/ghost/#/staff/${username}`);
     }
   });
-  return results;
+  return { news: results, urls: staffUrls };
 };
 
 /**
@@ -37,7 +41,7 @@ const parseNewsData = (data: PostsOrPages): NewsContributor[] => {
  */
 export const getNewsData = async (
   credentials: Credentials
-): Promise<NewsContributor[]> => {
+): Promise<{ news: NewsContributor[]; urls: string[] }> => {
   try {
     const options: GhostContentAPIOptions = {
       url: "https://freecodecamp.org/news",
