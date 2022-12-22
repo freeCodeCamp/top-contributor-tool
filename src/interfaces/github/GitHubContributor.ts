@@ -3,4 +3,5 @@ export interface GithubContributor {
   name: string;
   commits: number;
   url: string;
+  email: string;
 }

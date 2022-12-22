@@ -3,4 +3,5 @@ export interface ForumContributor {
   name: string;
   likes: number;
   url: string;
+  email: string;
 }

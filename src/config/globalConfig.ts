@@ -1,5 +1,5 @@
 export const globalConfig = {
-  start: 1609459200000,
+  start: 1640995200000,
   minimumCommits: 5,
   minimumLikes: 100,
 };

@@ -18,14 +18,15 @@ export const writeData = async (
     | GithubContributor[]
     | ForumContributor[]
     | NewsContributor[]
-    | CrowdinContributor[],
-  type: "GitHub" | "Forum" | "News" | "Crowdin",
+    | CrowdinContributor[]
+    | string[],
+  type: "GitHub" | "Forum" | "News" | "Crowdin" | "News URLS",
   fileName: string
 ) => {
   let parsedData = "";
 
   if (type === "GitHub") {
-    parsedData += "name,github-url,commits\n";
+    parsedData += "name,github-url,commits,email\n";
     (data as GithubContributor[]).forEach((datum) => {
       parsedData += `${datum.name},${datum.url},${datum.commits}\n`;
     });
@@ -49,6 +50,13 @@ export const writeData = async (
     parsedData += "name,username,contributions\n";
     (data as CrowdinContributor[]).forEach((datum) => {
       parsedData += `${datum.name},${datum.username},${datum.contributions}\n`;
+    });
+  }
+
+  if (type === "News URLS") {
+    parsedData += "staffUrl,email\n";
+    (data as string[]).forEach((datum) => {
+      parsedData += `${datum},\n`;
     });
   }
 
