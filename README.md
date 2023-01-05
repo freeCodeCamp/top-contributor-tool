@@ -1,3 +1,5 @@
+Note: This repo is now archived in favor of the code at https://github.com/freeCodeCamp/scripts/tree/main/packages/contributors
+
 # Top Contributor Tools
 
 This project is a CLI tool that aggregates a list of top contributors for our `/learn` repository, Crowdin translations, forum, and news publication.
